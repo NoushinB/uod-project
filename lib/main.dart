@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const Uod());
-}
+import 'app.dart';
 
-class Uod extends StatelessWidget {
-  const Uod({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+  runApp(MyApp());
 }
