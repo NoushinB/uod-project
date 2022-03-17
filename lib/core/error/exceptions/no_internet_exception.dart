@@ -1,0 +1,15 @@
+
+
+class NoInternetException implements Exception {
+  String message;
+  final int statusCode;
+
+  NoInternetException({required this.message, required this.statusCode}) {
+    if (message == null || message.isEmpty) {
+      message = "Your device is not connected to internet";
+    }
+  }
+
+  @override
+  String toString() => message;
+}
