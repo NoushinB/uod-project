@@ -1,5 +1,5 @@
-
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:uod/presentation/themes/app_assets.dart';
 import 'package:uod/presentation/themes/app_colors.dart';
@@ -12,9 +12,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,7 +35,7 @@ class _SplashPageState extends State<SplashPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
-                              Text("UOD", style: TextStyle( color: AppColors.secondaryColor, fontSize: 32, fontWeight: FontWeight.bold)),
+                              Text("UOD", style: TextStyle(color: AppColors.secondaryColor, fontSize: 32, fontWeight: FontWeight.bold)),
                             ],
                           ),
                         ],
@@ -65,6 +62,5 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> navigateToMainPage() async {
     debugPrint("Timer completed");
-
   }
 }
