@@ -16,39 +16,31 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: FutureBuilder(
-          builder: (context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              startTimer();
-              return Center(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Image.asset(AppAssets.Logo, fit: BoxFit.cover),
-                          const SizedBox(height: 50),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text("UOD", style: TextStyle(color: AppColors.secondaryColor, fontSize: 32, fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        ],
-                      ),
+                  children: [
+                    Image.asset(AppAssets.Logo, fit: BoxFit.cover),
+                    const SizedBox(height: 50),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text("UOD", style: TextStyle(color: AppColors.secondaryColor, fontSize: 32, fontWeight: FontWeight.bold)),
+                      ],
                     ),
-                    const Text('copyright @ 2022 - Awrosoft', style: TextStyle(fontSize: 12, color: AppColors.primaryColor)),
-                    const SizedBox(height: 16)
                   ],
                 ),
-              );
-            }
-            return const Center(child: CircularProgressIndicator());
-          },
+              ),
+              const Text('copyright @ 2022 - Awrosoft', style: TextStyle(fontSize: 12, color: AppColors.primaryColor)),
+              const SizedBox(height: 16)
+            ],
+          ),
         ),
       ),
     );

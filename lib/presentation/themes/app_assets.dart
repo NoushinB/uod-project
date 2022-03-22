@@ -1,3 +1,3 @@
 class AppAssets{
-  static const String Logo = "assets/images/app_logo.png";
+  static const String Logo = "assets/images/png/app_logo.png";
 }
