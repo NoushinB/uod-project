@@ -26,12 +26,12 @@ class _SplashPageState extends State<SplashPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Image.asset(AppAssets.Logo, fit: BoxFit.cover),
-                    const SizedBox(height: 50),
+                    Image.asset(AppAssets.Logo, fit: BoxFit.fill, width: 150, height: 170,),
+                    const SizedBox(height: 32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Text("UOD", style: TextStyle(color: AppColors.secondaryColor, fontSize: 32, fontWeight: FontWeight.bold)),
+                        Text("UOD", style: TextStyle(color: AppColors.primaryColor, fontSize: 32, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ],
