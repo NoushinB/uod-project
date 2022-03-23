@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:uod/presentation/themes/app_assets.dart';
-import 'package:uod/presentation/themes/app_colors.dart';
+import 'package:uod/core/core.dart';
+
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -26,7 +26,12 @@ class _SplashPageState extends State<SplashPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Image.asset(AppAssets.Logo, fit: BoxFit.fill, width: 150, height: 170,),
+                    Image.asset(
+                      AppAssets.Logo,
+                      fit: BoxFit.fill,
+                      width: 150,
+                      height: 170,
+                    ),
                     const SizedBox(height: 32),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
