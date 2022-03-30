@@ -6,6 +6,8 @@ abstract class NetworkPath {
   // Main APIs
   static String findEmployeeById(String id) => "$_host/employees/details/$id";
 
+  static String confirmAttendance(String eventCode) => "$_host/applies/attendance/confirm/$eventCode";
+
   // Identity APIs
   static const String token = "$_identityHost/connect/token";
 }
