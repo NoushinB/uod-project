@@ -1,6 +1,6 @@
 import 'package:uod/domain/entities/confirm_attendance.dart';
 
-class ConfirmAttendanceModel extends ConfirmAttendance {
+class ConfirmAttendanceModel extends ConfirmAttendanceEntity {
   final bool hasError;
   final int statusCode;
   final String? message;

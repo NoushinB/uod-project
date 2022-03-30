@@ -7,7 +7,7 @@ class TokenInput extends Equatable {
   final String userName;
   final String password;
 
-  TokenInput({required this.userName, required this.password});
+  const TokenInput({required this.userName, required this.password});
 
   @override
   List<Object?> get props => [userName, password];

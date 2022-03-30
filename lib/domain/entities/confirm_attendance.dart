@@ -1,9 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class ConfirmAttendance extends Equatable {
-
-
-  const ConfirmAttendance();
+class ConfirmAttendanceEntity extends Equatable {
+  const ConfirmAttendanceEntity();
 
   @override
   List<Object?> get props => [];
