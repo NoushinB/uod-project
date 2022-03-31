@@ -20,6 +20,5 @@ class AttendanceSourceImpl implements AttendanceSource {
     } catch (ex) {
       throw ServerException();
     }
-    ;
   }
 }

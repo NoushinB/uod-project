@@ -20,6 +20,5 @@ class EmployeeSourceImpl implements EmployeeSource {
     } catch (ex) {
       throw ServerException();
     }
-    ;
   }
 }

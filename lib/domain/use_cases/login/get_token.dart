@@ -13,10 +13,10 @@ class TokenInput extends Equatable {
   List<Object?> get props => [userName, password];
 }
 
-class GetToken implements UseCase<Token, TokenInput> {
+class GetTokenUseCase implements UseCase<Token, TokenInput> {
   final LoginRepository loginRepository;
 
-  GetToken({required this.loginRepository});
+  GetTokenUseCase({required this.loginRepository});
 
   @override
   Future<Result<Failure, Token?>> call(TokenInput input) {

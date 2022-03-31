@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Image.asset(
-                      AppAssets.Logo,
+                      AppAssets.logo,
                       fit: BoxFit.fill,
                       width: 150,
                       height: 170,

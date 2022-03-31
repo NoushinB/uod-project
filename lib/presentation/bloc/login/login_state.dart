@@ -13,11 +13,11 @@ class LoginState extends Equatable {
   @override
   List<Object?> get props => [status, token, failure];
 
-  LoginState copyWith({BlocStatus? status1, Token? token1, Failure? failure1}) {
+  LoginState copyWith({BlocStatus? newStatus, Token? newToken, Failure? newFailure}) {
     return LoginState(
-      status: status1 ?? status,
-      token: token1 ?? token,
-      failure: failure1 ?? failure,
+      status: newStatus ?? status,
+      token: newToken ?? token,
+      failure: newFailure ?? failure,
     );
   }
 }
