@@ -7,7 +7,7 @@ abstract class InternetInfoService {
 class InternetInfoImpl implements InternetInfoService {
   final InternetConnectionChecker checker;
 
-  const InternetInfoImpl(this.checker);
+  const InternetInfoImpl({required this.checker});
 
   @override
   Future<bool> hasConnection() => checker.hasConnection;

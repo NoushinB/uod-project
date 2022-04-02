@@ -24,7 +24,8 @@ class LoginRemoteSourceImpl implements LoginRemoteSource {
       Map<String, dynamic> headers = {
         "Content-Type": "application/x-www-form-urlencoded",
       };
-      var response = await dio.post(NetworkPath.token, data: body, options: Options(headers: headers));
+      dio.options.headers.addAll(headers);
+      var response = await dio.post(NetworkPath.token, data: body);
       ErrorHelper.ensureSuccessResponse(response, defaultMsg: "");
       return TokenModel.fromJson(response.data);
     } catch (ex) {
