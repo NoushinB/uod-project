@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uod/core/constants/app_assets.dart';
 import 'package:uod/core/constants/app_colors.dart';
+import 'package:uod/core/utils/enums/bloc_status.dart';
+import 'package:uod/injections.dart';
+import 'package:uod/presentation/bloc/login/login_bloc.dart';
+import 'package:uod/presentation/bloc/login/login_event.dart';
+import 'package:uod/presentation/bloc/login/login_state.dart';
 import 'package:uod/presentation/components/my_button.dart';
 import 'package:uod/presentation/components/my_text_field.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => getIt<LoginBloc>(),
+        child: const LoginView(),
+      ),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage> {
+class LoginView extends StatefulWidget {
+  const LoginView({Key? key}) : super(key: key);
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -20,8 +40,21 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var deviceHeight = MediaQuery.of(context).size.width;
     var padding = deviceHeight / 12;
-    return Scaffold(
-      body: Padding(
+    return BlocListener(
+      bloc: context.read<LoginBloc>(),
+      listener: (BuildContext context, LoginState state) {
+        if (state.status == BlocStatus.loaded) {
+          var token = state.token?.accessToken;
+          // TODO: save token here in sharedPreferences
+          // TODO: Go to home page (Navigate)
+        }
+
+        if (state.status == BlocStatus.error) {
+          var error = state.failure;
+          // TODO: Show error message to user
+        }
+      },
+      child: Padding(
         padding: EdgeInsets.all(padding),
         child: Form(
           key: _formKey,
@@ -57,15 +90,27 @@ class _HomePageState extends State<HomePage> {
                     return null;
                   }),
               const SizedBox(height: 16),
-              MyButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
+              BlocBuilder(
+                bloc: context.read<LoginBloc>(),
+                builder: (BuildContext context, LoginState state) {
+                  var titleOnLine = state.status == BlocStatus.loading ? "Loading..." : "Login";
+                  return MyButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        // Get username and password
+                        var userName = _userNameController.text;
+                        var password = _passwordController.text;
+
+                        // Get login bloc instance
+                        var loginBloc = context.read<LoginBloc>();
+
+                        // Send event to get token
+                        loginBloc.add(GetToken(username: userName, password: password));
+                      }
+                    },
+                    textName: titleOnLine,
+                  );
                 },
-                textName: "Login",
               ),
               Align(
                 alignment: Alignment.topRight,
