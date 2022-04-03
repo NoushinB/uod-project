@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:uod/domain/entities/employee_details.dart';
 
 class EmployeeDetailsModel extends EmployeeDetails {
@@ -14,13 +13,13 @@ class EmployeeDetailsModel extends EmployeeDetails {
     required String employeeCode,
     required String fullName,
     required String positionTitle,
-     required String image,
+    required String image,
   }) : super(
           employeeId: employeeId,
           employeeCode: employeeCode,
           fullName: fullName,
           positionTitle: positionTitle,
-    image: image,
+          image: image,
         );
 
   factory EmployeeDetailsModel.fromJson(Map<String, dynamic> json) {
@@ -38,7 +37,7 @@ class EmployeeDetailsModel extends EmployeeDetails {
       employeeCode: dataJson != null ? dataJson["employeeCode"] : null,
       fullName: dataJson != null ? dataJson["fullName"] : null,
       positionTitle: dataJson != null ? dataJson["positionTitle"] : null,
-      image: dataJson != null ? dataJson["image"] : null,
+      image: "",
     );
   }
 

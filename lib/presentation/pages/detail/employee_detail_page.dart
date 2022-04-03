@@ -7,6 +7,7 @@ import 'package:uod/presentation/bloc/employee/employee_detail_bloc.dart';
 import 'package:uod/presentation/bloc/employee/employee_detail_event.dart';
 import 'package:uod/presentation/bloc/employee/employee_detail_state.dart';
 import 'package:uod/presentation/components/my_button.dart';
+import 'package:uod/presentation/pages/scanner_page.dart';
 
 class EmployeeDetailPage extends StatelessWidget {
   const EmployeeDetailPage({Key? key}) : super(key: key);
@@ -48,81 +49,91 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
                   // Success (Loaded)
                   if (state.status == BlocStatus.loaded) {
                     var details = state.details;
-                    return Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Ink(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: NetworkImage(details?.image ?? ""),
-                                  fit: BoxFit.cover,
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                      ),
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 48,
+                          ),
+                          SizedBox(
+                            child: Stack(
+                              children: [
+                                Ink(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.lightGray,
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: NetworkImage(details?.image ?? ""),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
+                                Align(
+                                  alignment: const Alignment(1.2, 1.2),
+                                  child: MaterialButton(
+                                    minWidth: 0,
+                                    onPressed: () {},
+                                    child: const Icon(Icons.camera_alt_outlined,color: AppColors.white,),
+                                    color: AppColors.primaryColor.withOpacity(0.5),
+                                    elevation: 0,
+                                    shape: const CircleBorder(),
+                                  ),
+                                )
+                              ],
+                            ),
+                            width: 120,
+                            height: 120,
+                          ),
+                          const SizedBox(height: 40),
+                          Text(
+                            details?.fullName ?? "",
+                            style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 40),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            children: [
+                              const Text(
+                                "positionTitle:  ",
+                                style: TextStyle(fontSize: 16, color: AppColors.black, fontWeight: FontWeight.bold),
                               ),
-                            ),
-                            Align(
-                              alignment: const Alignment(1.5, 1.5),
-                              child: MaterialButton(
-                                minWidth: 0,
-                                onPressed: () {},
-                                child: const Icon(Icons.camera_alt),
-                                color: AppColors.lightPrimaryColor,
-                                elevation: 0,
-                                shape: const CircleBorder(),
+                              const SizedBox(width: 8),
+                              Text(details?.positionTitle ?? ""),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            children: [
+                              const Text(
+                                "EmployeeId:    ",
+                                style: TextStyle(fontSize: 16, color: AppColors.black, fontWeight: FontWeight.bold),
                               ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              "Name:",
-                              style: TextStyle(fontSize: 32, color: AppColors.black),
-                            ),
-                            Text(details?.fullName ?? ""),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              "positionTitle:",
-                              style: TextStyle(fontSize: 32, color: AppColors.black),
-                            ),
-                            Text(details?.positionTitle ?? ""),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              "EmployeeId:",
-                              style: TextStyle(fontSize: 32, color: AppColors.black),
-                            ),
-                            Text(details?.employeeId ?? ""),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 32,
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              "EmployeeCode:",
-                              style: TextStyle(fontSize: 32, color: AppColors.black),
-                            ),
-                            Text(details?.employeeCode ?? ""),
-                          ],
-                        ),
-                      ],
+                              const SizedBox(width: 8),
+                              Expanded(child: Text(details?.employeeId ?? "")),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            children: [
+                              const Text(
+                                "EmployeeCode: ",
+                                style: TextStyle(fontSize: 16, color: AppColors.black, fontWeight: FontWeight.bold),
+                              ),
+                              Text(details?.employeeCode ?? ""),
+                            ],
+                          ),
+                        ],
+                      ),
                     );
                   }
 
@@ -135,7 +146,9 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
                 },
               ),
             ),
-            MyButton(onPressed: () {}, textName: "Scan")
+            MyButton(onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const ScannerPage()));
+            }, textName: "Scan")
           ],
         ));
   }

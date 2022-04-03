@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uod/data/data.dart';
 import 'package:uod/domain/domain.dart';
 
 import 'core/core.dart';
+import 'data/data_sources/local/shared_prefs/local_storage_service.dart';
 import 'presentation/presentation.dart';
 
 final getIt = GetIt.instance;
@@ -35,4 +37,7 @@ Future<void> init() async {
 
   // Register (init) OTHERS
   getIt.registerLazySingleton<Dio>(() => getDioClient());
+  //final sharedPreferences = await SharedPreferences.getInstance();
+  //getIt.registerLazySingleton(() => sharedPreferences);
+  //getIt.registerLazySingleton(() => LocalStorageService().getInstance());
 }
