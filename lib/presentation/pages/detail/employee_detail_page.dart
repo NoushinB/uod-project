@@ -132,7 +132,7 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
                   padding: const EdgeInsets.all(16.0),
                   child: MyButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ScannerPage()));
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const ScannerPage()));
                       },
                       textName: "Scan"),
                 ),

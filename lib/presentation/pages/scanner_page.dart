@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:uod/core/constants/app_colors.dart';
@@ -25,7 +26,6 @@ class _ScannerPageState extends State<ScannerPage> {
   @override
   void reassemble() async{
     super.reassemble();
-
   }
 
   @override
@@ -77,3 +77,4 @@ class _ScannerPageState extends State<ScannerPage> {
     setState(() => this.controller = controller);
   }
 }
+*/

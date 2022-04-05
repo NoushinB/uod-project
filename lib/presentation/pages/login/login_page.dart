@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uod/core/constants/app_assets.dart';
 import 'package:uod/core/constants/app_colors.dart';
 import 'package:uod/core/utils/enums/bloc_status.dart';
+import 'package:uod/data/data_sources/local/shared_prefs/local_storage_service.dart';
 import 'package:uod/injections.dart';
 import 'package:uod/presentation/bloc/login/login_bloc.dart';
 import 'package:uod/presentation/bloc/login/login_event.dart';
 import 'package:uod/presentation/bloc/login/login_state.dart';
 import 'package:uod/presentation/components/my_button.dart';
 import 'package:uod/presentation/components/my_text_field.dart';
+import 'package:uod/presentation/pages/detail/employee_detail_page.dart';
 import 'package:uod/presentation/pages/login/password_recovery.dart';
 
 class LoginPage extends StatelessWidget {
@@ -33,7 +35,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -44,15 +45,17 @@ class _LoginViewState extends State<LoginView> {
     var padding = deviceHeight / 12;
     return BlocListener(
       bloc: context.read<LoginBloc>(),
-      listener: (BuildContext context, LoginState state) {
+      listener: (BuildContext context, LoginState state) async {
         if (state.status == BlocStatus.loaded) {
+          var _storage = await LocalStorageService.getInstance();
           var token = state.token?.accessToken;
-          // TODO: save token here in sharedPreferences
-          // TODO: Go to home page (Navigate)
+          if (token != null) {
+            _storage?.token = token;
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const EmployeeDetailPage()));
+          }
         }
 
         if (state.status == BlocStatus.error) {
-          var error = state.failure;
           // TODO: Show error message to user
         }
       },
@@ -117,7 +120,9 @@ class _LoginViewState extends State<LoginView> {
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const PasswordRecovery()));},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const PasswordRecovery()));
+                  },
                   child: const Text("Forgot Password?", style: TextStyle(color: AppColors.errorColor)),
                 ),
               ),

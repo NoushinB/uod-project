@@ -1,7 +1,7 @@
 import 'package:uod/domain/entities/token.dart';
 
 class TokenModel extends Token {
-  final String expiresIn;
+  final int expiresIn;
   final String tokenType;
 
   const TokenModel({

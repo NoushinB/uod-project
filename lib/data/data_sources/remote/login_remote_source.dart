@@ -16,8 +16,8 @@ class LoginRemoteSourceImpl implements LoginRemoteSource {
     try {
       Map<String, dynamic> body = {
         "grant_type": "password",
-        "client_id": "mobile.admin",
-        "client_secret": "secret",
+        "client_id": "qa.client",
+        "client_secret": "511536EF-F270-4058-80CA-1C89C192F69A",
         "username": userName,
         "password": password,
       };

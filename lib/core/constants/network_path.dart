@@ -1,7 +1,7 @@
 abstract class NetworkPath {
   // Hosts
   static const String _host = "http://116.202.131.209:3119/api/v1";
-  static const String _identityHost = "http://uod-ids.awrosoft.com";
+  static const String _identityHost = "https://uod-ids.awrosoft.com";
 
   // Main APIs
   static String findEmployeeById() => "$_host/employees/details";

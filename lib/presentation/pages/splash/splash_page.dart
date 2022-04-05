@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:uod/core/core.dart';
-
+import 'package:uod/data/data_sources/local/shared_prefs/local_storage_service.dart';
+import 'package:uod/presentation/pages/detail/employee_detail_page.dart';
+import 'package:uod/presentation/pages/login/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -12,6 +14,12 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,10 +62,17 @@ class _SplashPageState extends State<SplashPage> {
   startTimer() async {
     debugPrint("Timer started");
     var _duration = const Duration(seconds: 3);
-    return Timer(_duration, navigateToMainPage);
+    return Timer(_duration, doWorkAfterTimerMethod);
   }
 
-  Future<void> navigateToMainPage() async {
+  Future<void> doWorkAfterTimerMethod() async {
     debugPrint("Timer completed");
+    var _storage = await LocalStorageService?.getInstance();
+    var token = _storage?.token;
+    if (token == null || token.isEmpty) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+    } else {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const EmployeeDetailPage()));
+    }
   }
 }
