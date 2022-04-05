@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uod/core/core.dart';
 import 'package:uod/core/utils/enums/bloc_status.dart';
 import 'package:uod/domain/use_cases/attendance/confirm_attendance_use_case.dart';
 import 'package:uod/presentation/bloc/attendance/confirm_attendance_event.dart';
@@ -8,7 +7,10 @@ import 'package:uod/presentation/bloc/attendance/confirm_attendance_state.dart';
 class ConfirmAttendanceBloc extends Bloc<ConfirmAttendanceEvent, ConfirmAttendanceState> {
   final ConfirmAttendanceUseCase confirmAttendanceUseCase;
 
-  ConfirmAttendanceBloc({required this.confirmAttendanceUseCase}) : super(const ConfirmAttendanceState(status: BlocStatus.uninitialized)) {
+  ConfirmAttendanceBloc({required this.confirmAttendanceUseCase})
+      : super(const ConfirmAttendanceState(
+          status: BlocStatus.uninitialized,
+        )) {
     on<DoAttendance>(_doAttendance);
   }
 
