@@ -8,10 +8,10 @@ abstract class EmployeeDetailEvent extends Equatable {
 }
 
 class FetchEmployeeDetail extends EmployeeDetailEvent {
-  final String id;
 
-  const FetchEmployeeDetail({required this.id});
+
+  const FetchEmployeeDetail();
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [];
 }

@@ -17,7 +17,7 @@ class EmployeeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocProvider(
-        create: (context) => getIt<EmployeeDetailBloc>()..add(const FetchEmployeeDetail(id: "0317730a-7087-442c-879b-b0ec3684a886")),
+        create: (context) => getIt<EmployeeDetailBloc>()..add(const FetchEmployeeDetail()),
         child: const EmployeeDetailView(),
       ),
     );
