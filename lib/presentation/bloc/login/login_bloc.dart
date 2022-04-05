@@ -18,7 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (result.isSuccess()) {
       emit(state.copyWith(newStatus: BlocStatus.loaded, newToken: result.getSuccess()));
     } else {
-      emit(state.copyWith(newStatus: BlocStatus.error, newFailure: ServerFailure()));
+      emit(state.copyWith(newStatus: BlocStatus.error, newFailure: result.getError()));
     }
   }
 }

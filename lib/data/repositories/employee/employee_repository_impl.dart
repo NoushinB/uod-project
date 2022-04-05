@@ -1,6 +1,4 @@
 import 'package:uod/core/core.dart';
-import 'package:uod/core/error/failure.dart';
-import 'package:uod/core/utils/generics/multiple_results.dart';
 import 'package:uod/data/data_sources/remote/employee_source.dart';
 import 'package:uod/domain/entities/employee_details.dart';
 import 'package:uod/domain/repositories/employee/employee_repository.dart';
@@ -12,10 +10,10 @@ class EmployeeRepositoryImpl implements EmployeeRepository {
   const EmployeeRepositoryImpl({required this.employeeSource, required this.internetInfoService});
 
   @override
-  Future<Result<Failure, EmployeeDetails>> getDetails(String id) async {
+  Future<Result<Failure, EmployeeDetails>> getDetails() async {
     try {
       if (await internetInfoService.hasConnection()) {
-        final result = await employeeSource.getDetails(id);
+        final result = await employeeSource.getDetails();
         return Success(result);
       }
       return Error(NotConnectedFailure());

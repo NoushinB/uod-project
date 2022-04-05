@@ -9,6 +9,6 @@ class GetDetailsUseCase implements UseCase<EmployeeDetails, String> {
 
   @override
   Future<Result<Failure, EmployeeDetails?>> call(String input) {
-    return employeeRepository.getDetails(input);
+    return employeeRepository.getDetails();
   }
 }

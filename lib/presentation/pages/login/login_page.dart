@@ -9,6 +9,7 @@ import 'package:uod/presentation/bloc/login/login_event.dart';
 import 'package:uod/presentation/bloc/login/login_state.dart';
 import 'package:uod/presentation/components/my_button.dart';
 import 'package:uod/presentation/components/my_text_field.dart';
+import 'package:uod/presentation/pages/login/password_recovery.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -116,7 +117,7 @@ class _LoginViewState extends State<LoginView> {
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const PasswordRecovery()));},
                   child: const Text("Forgot Password?", style: TextStyle(color: AppColors.errorColor)),
                 ),
               ),

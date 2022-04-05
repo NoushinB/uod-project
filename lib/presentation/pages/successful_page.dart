@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uod/core/core.dart';
 import 'package:uod/presentation/components/my_button.dart';
 import 'package:uod/presentation/pages/detail/employee_detail_page.dart';
@@ -18,7 +19,7 @@ class _SuccessfulPageState extends State<SuccessfulPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Expanded(child: SizedBox(height: 200, width: 200, child: Image.asset(AppAssets.tick))),
+            Expanded(child: SizedBox(height: 200, width: 200, child: SvgPicture.asset(AppAssets.tick))),
             const Expanded(
                 child: Text(
               "Successful",

@@ -18,7 +18,7 @@ class EmployeeDetailBloc extends Bloc<EmployeeDetailEvent, EmployeeDetailState> 
     if (result.isSuccess()) {
       emit(state.copyWith(newStatus: BlocStatus.loaded, newDetails: result.getSuccess()));
     } else {
-      emit(state.copyWith(newStatus: BlocStatus.error, newFailure: ServerFailure()));
+      emit(state.copyWith(newStatus: BlocStatus.error, newFailure: result.getError()));
     }
   }
 }

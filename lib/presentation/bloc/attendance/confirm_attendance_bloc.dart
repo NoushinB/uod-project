@@ -18,7 +18,7 @@ class ConfirmAttendanceBloc extends Bloc<ConfirmAttendanceEvent, ConfirmAttendan
     if (result.isSuccess()) {
       emit(state.copyWith(newStatus: BlocStatus.loaded));
     } else {
-      emit(state.copyWith(newStatus: BlocStatus.error, newFailure: ServerFailure()));
+      emit(state.copyWith(newStatus: BlocStatus.error, newFailure: result.getError()));
     }
   }
 }
