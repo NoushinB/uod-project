@@ -223,7 +223,19 @@ class ProfileHeader extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],
-
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text("Logout", style: TextStyle(color: Colors.red)),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(color: Colors.red),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         )

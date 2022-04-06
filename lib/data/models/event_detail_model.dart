@@ -46,19 +46,18 @@ class EventDetailModel extends EventDetail {
     }
 
     // Properties
-    Map<String, dynamic>? propertiesJson;
-    if (dataJson!["properties"] != null) {
+    /*if (dataJson!["properties"] != null) {
       propertiesJson = dataJson["properties"] as Map<String, dynamic>;
     }
     List<Properties>? properties;
     if (propertiesJson != null) {
       properties = (propertiesJson as List).map((p) => Properties(name: p["name"], title: p["title"], value: p["value"],)).toList();
-    }
+    }*/
 
     // Apply Details
     Map<String, dynamic>? applyJson;
-    if (dataJson["applyDetails"] != null) {
-      applyJson = dataJson["applyDetails"] as Map<String, dynamic>;
+    if (dataJson?["applyDetails"] != null) {
+      applyJson = dataJson?["applyDetails"] as Map<String, dynamic>;
     }
     ApplyDetail? applyDetail;
     if (applyJson != null) {
@@ -73,15 +72,14 @@ class EventDetailModel extends EventDetail {
       hasError: json["hasError"],
       statusCode: json["statusCode"],
       message: json["message"],
-      category: dataJson["category"],
-      topic: json["topic"],
-      createdAt: json["createdAt"],
-      categoryId: json["categoryId"],
-      startDate: json["startDate"],
-      lastEventDate: json["lastEventDate"],
-      activityType: json["activityType"],
+      category: dataJson != null ? dataJson["category"] ?? "" : "",
+      topic: dataJson != null ? dataJson["topic"] ?? "" : "",
+      createdAt: dataJson != null ? dataJson["createdAt"] ?? "" : "",
+      categoryId: dataJson != null ? dataJson["categoryId"] ?? "" : "",
+      startDate: dataJson != null ? dataJson["startDate"] ?? "" : "",
+      lastEventDate: dataJson != null ? dataJson["lastEventDate"] ?? "" : "",
+      activityType: dataJson != null ? dataJson["activityType"] ?? "" : "",
       applyDetail: applyDetail,
-      properties: properties,
     );
   }
 
