@@ -13,12 +13,16 @@ class EmployeeDetailsModel extends EmployeeDetails {
     required String employeeCode,
     required String fullName,
     required String positionTitle,
+    required String birthDate,
+    required String personalEmail,
     required String image,
   }) : super(
           employeeId: employeeId,
           employeeCode: employeeCode,
           fullName: fullName,
           positionTitle: positionTitle,
+          birthDate: birthDate,
+          personalEmail: personalEmail,
           image: image,
         );
 
@@ -33,10 +37,12 @@ class EmployeeDetailsModel extends EmployeeDetails {
       hasError: json["hasError"],
       statusCode: json["statusCode"],
       message: json["message"],
-      employeeId: dataJson != null ? dataJson["employeeId"] : null,
-      employeeCode: dataJson != null ? dataJson["employeeCode"] : null,
-      fullName: dataJson != null ? dataJson["fullName"] : null,
-      positionTitle: dataJson != null ? dataJson["positionTitle"] : null,
+      employeeId: dataJson != null ? dataJson["employeeId"] ?? "" : null,
+      employeeCode: dataJson != null ? dataJson["employeeCode"] ?? "" : null,
+      fullName: dataJson != null ? dataJson["fullName"] ?? "" : null,
+      positionTitle: dataJson != null ? dataJson["positionTitle"] ?? "" : null,
+      birthDate: dataJson != null ? dataJson["birthDate"] ?? "" : null,
+      personalEmail: dataJson != null ? dataJson["personalEmail"] ?? "" : "",
       image: "",
     );
   }
@@ -50,6 +56,8 @@ class EmployeeDetailsModel extends EmployeeDetails {
     json["data"]["employeeCode"] = employeeId;
     json["data"]["fullName"] = employeeId;
     json["data"]["positionTitle"] = employeeId;
+    json["data"]["birthDate"] = birthDate;
+    json["data"]["personalEmail"] = personalEmail;
     json["data"]["image"] = image;
 
     return json;

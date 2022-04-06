@@ -5,6 +5,8 @@ class EmployeeDetails extends Equatable {
   final String employeeCode;
   final String fullName;
   final String positionTitle;
+  final String birthDate;
+  final String? personalEmail;
   final String? image;
 
   const EmployeeDetails({
@@ -12,9 +14,11 @@ class EmployeeDetails extends Equatable {
     required this.employeeCode,
     required this.fullName,
     required this.positionTitle,
+    required this.birthDate,
+    this.personalEmail,
     this.image,
   });
 
   @override
-  List<Object?> get props => [employeeId, employeeCode, fullName, positionTitle,image];
+  List<Object?> get props => [employeeId, employeeCode, fullName, positionTitle, birthDate, personalEmail, image];
 }
