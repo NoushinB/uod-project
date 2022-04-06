@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -92,4 +93,4 @@ class _ScannerPageState extends State<ScannerPage> {
                       ]));
             })));
   }
-}
+}*/
