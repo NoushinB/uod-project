@@ -40,17 +40,13 @@ class _SplashPageState extends State<SplashPage> {
                       width: 150,
                       height: 170,
                     ),
-                    const SizedBox(height: 32),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text("UOD", style: TextStyle(color: AppColors.primaryColor, fontSize: 32, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
+                    const SizedBox(height: 16),
+                    const Text("UOD", style: TextStyle(color: AppColors.black, fontSize: 32, fontWeight: FontWeight.bold)),
+                    const Text("QA Attendance", style: TextStyle(color: AppColors.black, fontSize: 16, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
-              const Text('copyright @ 2022 - Awrosoft', style: TextStyle(fontSize: 12, color: AppColors.primaryColor)),
+              const Text('Copyright @ 2022 - Awrosoft', style: TextStyle(fontSize: 12, color: Colors.red, fontWeight: FontWeight.bold)),
               const SizedBox(height: 16)
             ],
           ),

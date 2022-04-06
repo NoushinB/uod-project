@@ -157,7 +157,7 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
                     onPressed: () {
                       //scanQR();
                     },
-                    textName: "Scan",
+                    title: "Scan",
                   ),
                 ),
               ],

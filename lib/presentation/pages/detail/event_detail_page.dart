@@ -73,12 +73,12 @@ class _EventDetailViewState extends State<EventDetailView> {
                     child: BlocBuilder(
                       bloc: context.read<ConfirmAttendanceBloc>(),
                       builder: (context, ConfirmAttendanceState confirmState) {
-                        var title = confirmState.status == BlocStatus.loading ? "Wait..." : "Confirm Attendance";
                         return MyButton(
                           onPressed: () {
                             context.read<ConfirmAttendanceBloc>().add(DoAttendance(eventCode: widget.eventCode));
                           },
-                          textName: title,
+                          title: "Confirm Attendance",
+                          isBusy: confirmState.status == BlocStatus.loading,
                         );
                       },
                     ),

@@ -72,11 +72,13 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       const SizedBox(height: 64),
                       SizedBox(
-                        width: 90,
-                        height: 120,
+                        width: 110,
+                        height: 140,
                         child: Image.asset(AppAssets.logo),
                       ),
-                      const SizedBox(height: 64),
+                      const SizedBox(height: 8),
+                      const Text("Login", style: TextStyle(color: AppColors.black, fontSize: 24, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 48),
                       MyTextFormField(
                           icon: Icons.account_circle_outlined,
                           hintText: "Input userName",
@@ -98,26 +100,28 @@ class _LoginViewState extends State<LoginView> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 48),
                       BlocBuilder(
                         bloc: context.read<LoginBloc>(),
                         builder: (BuildContext context, LoginState state) {
-                          var titleOnLine = state.status == BlocStatus.loading ? "Loading..." : "Login";
                           return MyButton(
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                // Get username and password
-                                var userName = _userNameController.text;
-                                var password = _passwordController.text;
+                              if (state.status != BlocStatus.loading) {
+                                if (_formKey.currentState!.validate()) {
+                                  // Get username and password
+                                  var userName = _userNameController.text;
+                                  var password = _passwordController.text;
 
-                                // Get login bloc instance
-                                var loginBloc = context.read<LoginBloc>();
+                                  // Get login bloc instance
+                                  var loginBloc = context.read<LoginBloc>();
 
-                                // Send event to get token
-                                loginBloc.add(GetToken(username: userName, password: password));
+                                  // Send event to get token
+                                  loginBloc.add(GetToken(username: userName, password: password));
+                                }
                               }
                             },
-                            textName: titleOnLine,
+                            title: "Login",
+                            isBusy: state.status == BlocStatus.loading,
                           );
                         },
                       ),

@@ -31,10 +31,12 @@ class _SuccessfulPageState extends State<SuccessfulPage> {
             )),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: MyButton(onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const EmployeeDetailPage()));
-
-              }, textName: "Go To Profile"),
+              child: MyButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const EmployeeDetailPage()));
+                },
+                title: "Go To Profile",
+              ),
             )
           ],
         ),

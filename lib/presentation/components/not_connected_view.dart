@@ -18,11 +18,11 @@ class NotConnectedView extends StatelessWidget {
           const SizedBox(height: 32),
           const Text(
             "Connection Lost!",
-            style: TextStyle(fontSize: 32, color: AppColors.primaryColor,fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 32, color: AppColors.primaryColor, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           const Padding(
-            padding: EdgeInsets.only(left: 8.0,right: 8.0),
+            padding: EdgeInsets.only(left: 8.0, right: 8.0),
             child: Text(
               "No internet connection,check the connection to your network.",
               style: TextStyle(
@@ -34,7 +34,10 @@ class NotConnectedView extends StatelessWidget {
           const SizedBox(height: 64),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: MyButton(onPressed: () {}, textName: "Try again"),
+            child: MyButton(
+              onPressed: () {},
+              title: "Try Again",
+            ),
           ),
         ],
       ),

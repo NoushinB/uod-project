@@ -8,10 +8,6 @@ import 'package:uod/presentation/components/my_text_field.dart';
 class PasswordRecovery extends StatelessWidget {
   const PasswordRecovery({Key? key}) : super(key: key);
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     final TextEditingController _phoneController = TextEditingController();
@@ -22,11 +18,11 @@ class PasswordRecovery extends StatelessWidget {
         const SizedBox(height: 32),
         const Text(
           "Password recovery",
-          style: TextStyle(fontSize: 32, color: AppColors.primaryColor,fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 32, color: AppColors.primaryColor, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         const Padding(
-          padding: EdgeInsets.only(left: 8.0,right: 8.0),
+          padding: EdgeInsets.only(left: 8.0, right: 8.0),
           child: Text(
             "Enter your Phone number to recover your password",
             style: TextStyle(
@@ -35,10 +31,11 @@ class PasswordRecovery extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         MyTextFormField(
             icon: Icons.mail_outline_outlined,
-            hintText: "Email,Phone", controller: _phoneController,
+            hintText: "Email,Phone",
+            controller: _phoneController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
@@ -47,9 +44,11 @@ class PasswordRecovery extends StatelessWidget {
             }),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: MyButton(onPressed: () {}, textName: "Send Login Link"),
+          child: MyButton(
+            onPressed: () {},
+            title: "Send Login Link",
+          ),
         ),
-
       ],
     );
   }
