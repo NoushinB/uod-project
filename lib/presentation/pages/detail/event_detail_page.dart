@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uod/core/constants/network_path.dart';
 import 'package:uod/core/utils/enums/bloc_status.dart';
 import 'package:uod/injections.dart';
 import 'package:uod/presentation/bloc/attendance/confirm_attendance_bloc.dart';
@@ -57,7 +58,15 @@ class _EventDetailViewState extends State<EventDetailView> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
-                      children: [Text(eventDetail?.activityType.toString() ?? "")],
+                      children: [
+                        const SizedBox(height: 64),
+                        SizedBox(width: 350, height: 250, child: Image.network(NetworkPath.attendanceImageUrl)),
+                        Text(eventDetail?.category ?? "", style: Theme.of(context).textTheme.headline4),
+                        const SizedBox(height: 16),
+                        Text("Start Date", style: Theme.of(context).textTheme.headline5),
+                        const SizedBox(height: 8),
+                        Text(eventDetail?.startDate ?? "", style: Theme.of(context).textTheme.bodyText1),
+                      ],
                     ),
                   ),
                 ),

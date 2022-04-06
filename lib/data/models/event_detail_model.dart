@@ -7,14 +7,12 @@ class EventDetailModel extends EventDetail {
   final bool hasError;
   final int statusCode;
   final String? message;
-  final String category;
   final String? description;
   final String? eventStatus;
   final String? profileStatus;
   final String topic;
   final String createdAt;
   final String categoryId;
-  final String startDate;
   final String lastEventDate;
   final int? eventThreshold;
   final int? points;
@@ -23,21 +21,21 @@ class EventDetailModel extends EventDetail {
     required this.hasError,
     required this.statusCode,
     this.message,
-    required this.category,
     this.description,
     this.eventStatus,
     this.profileStatus,
     required this.topic,
     required this.createdAt,
     required this.categoryId,
-    required this.startDate,
     required this.lastEventDate,
     this.eventThreshold,
     this.points,
+    required String category,
+    required String startDate,
     required int activityType,
     List<Properties>? properties,
     ApplyDetail? applyDetail,
-  }) : super(activityType: activityType, properties: properties, applyDetail: applyDetail);
+  }) : super(category: category, startDate: startDate, activityType: activityType, properties: properties, applyDetail: applyDetail);
 
   factory EventDetailModel.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic>? dataJson;

@@ -15,4 +15,5 @@ abstract class NetworkPath {
 
   // Files
   static const String defaultAvatarUrl = "https://i.postimg.cc/ZRs6MP86/7cc7a630624d20f7797cb4c8e93c09c1.png";
+  static const String attendanceImageUrl = "https://i.postimg.cc/dtH43t6V/poor-attendance-at-work-2d-isolated-illustration-employee-late-to-office-absent-worker-angry-boss-fl.jpg";
 }
