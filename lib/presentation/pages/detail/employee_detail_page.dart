@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uod/core/core.dart';
 import 'package:uod/core/utils/enums/bloc_status.dart';
@@ -35,7 +37,7 @@ class EmployeeDetailView extends StatefulWidget {
 class _EmployeeDetailViewState extends State<EmployeeDetailView> {
   String _scanBarcode = 'Unknown';
 
-  /*Future<void> scanQR() async {
+  Future<void> scanQR() async {
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -55,7 +57,7 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
     setState(() {
       _scanBarcode = barcodeScanRes;
     });
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +98,7 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
                   padding: const EdgeInsets.only(left: 40, right: 40, top: 8, bottom: 32),
                   child: MyButton(
                     onPressed: () {
-                      //scanQR();
-                      var barcodeScanRes = "5436noh3uz";
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetailPage(eventCode: barcodeScanRes)));
+                      scanQR();
                     },
                     title: "Scan",
                   ),

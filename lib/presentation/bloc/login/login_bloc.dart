@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uod/core/core.dart';
 import 'package:uod/core/utils/enums/bloc_status.dart';
 import 'package:uod/domain/use_cases/login/get_token.dart';
 import 'package:uod/presentation/bloc/login/login_event.dart';
