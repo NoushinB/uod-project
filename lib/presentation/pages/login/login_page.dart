@@ -42,7 +42,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     var deviceHeight = MediaQuery.of(context).size.width;
-    var padding = deviceHeight / 12;
+    var padding = deviceHeight / 9;
     return BlocListener(
       bloc: context.read<LoginBloc>(),
       listener: (BuildContext context, LoginState state) async {
@@ -64,66 +64,74 @@ class _LoginViewState extends State<LoginView> {
         child: Form(
           key: _formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(
-                width: 90,
-                height: 120,
-                child: Image.asset(AppAssets.logo),
-              ),
-              const SizedBox(height: 64),
-              MyTextFormField(
-                  icon: Icons.account_circle_outlined,
-                  hintText: "Input userName",
-                  controller: _userNameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  }),
-              const SizedBox(height: 16),
-              MyTextFormField(
-                  icon: Icons.lock_outline,
-                  hintText: "Input Password",
-                  controller: _passwordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  }),
-              const SizedBox(height: 16),
-              BlocBuilder(
-                bloc: context.read<LoginBloc>(),
-                builder: (BuildContext context, LoginState state) {
-                  var titleOnLine = state.status == BlocStatus.loading ? "Loading..." : "Login";
-                  return MyButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // Get username and password
-                        var userName = _userNameController.text;
-                        var password = _passwordController.text;
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 64),
+                      SizedBox(
+                        width: 90,
+                        height: 120,
+                        child: Image.asset(AppAssets.logo),
+                      ),
+                      const SizedBox(height: 64),
+                      MyTextFormField(
+                          icon: Icons.account_circle_outlined,
+                          hintText: "Input userName",
+                          controller: _userNameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          }),
+                      const SizedBox(height: 16),
+                      MyTextFormField(
+                          icon: Icons.lock_outline,
+                          hintText: "Input Password",
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          }),
+                      const SizedBox(height: 32),
+                      BlocBuilder(
+                        bloc: context.read<LoginBloc>(),
+                        builder: (BuildContext context, LoginState state) {
+                          var titleOnLine = state.status == BlocStatus.loading ? "Loading..." : "Login";
+                          return MyButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                // Get username and password
+                                var userName = _userNameController.text;
+                                var password = _passwordController.text;
 
-                        // Get login bloc instance
-                        var loginBloc = context.read<LoginBloc>();
+                                // Get login bloc instance
+                                var loginBloc = context.read<LoginBloc>();
 
-                        // Send event to get token
-                        loginBloc.add(GetToken(username: userName, password: password));
-                      }
-                    },
-                    textName: titleOnLine,
-                  );
-                },
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const PasswordRecovery()));
-                  },
-                  child: const Text("Forgot Password?", style: TextStyle(color: AppColors.errorColor)),
+                                // Send event to get token
+                                loginBloc.add(GetToken(username: userName, password: password));
+                              }
+                            },
+                            textName: titleOnLine,
+                          );
+                        },
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const PasswordRecovery()));
+                          },
+                          child: const Text("Forgot Password?", style: TextStyle(color: AppColors.errorColor)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
