@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uod/core/core.dart';
 import 'package:uod/core/utils/enums/bloc_status.dart';
+import 'package:uod/data/data_sources/local/shared_prefs/local_storage_service.dart';
 import 'package:uod/domain/entities/employee_details.dart';
 import 'package:uod/injections.dart';
 import 'package:uod/presentation/bloc/employee/employee_detail_bloc.dart';
@@ -42,8 +46,12 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'Cancel', true, ScanMode.QR);
-      barcodeScanRes = "5436noh3uz";
-      Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetailPage(eventCode: barcodeScanRes)));
+      if(barcodeScanRes != "-1"){
+        barcodeScanRes = "5436noh3uz";
+        Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetailPage(eventCode: barcodeScanRes)));
+      }else {
+        Fluttertoast.showToast(msg: "QR Code Not Found");
+      }
       debugPrint(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -224,7 +232,12 @@ class ProfileHeader extends StatelessWidget {
                 ),
               ],
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  var _storage = await LocalStorageService.getInstance();
+                  _storage?.token = "";
+                  Navigator.pop(context);
+                  exit(0);
+                },
                 child: const Text("Logout", style: TextStyle(color: Colors.red)),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
