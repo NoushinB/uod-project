@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uod/core/core.dart';
 import 'package:uod/core/utils/enums/bloc_status.dart';
@@ -8,7 +10,7 @@ import 'package:uod/presentation/bloc/employee/employee_detail_event.dart';
 import 'package:uod/presentation/bloc/employee/employee_detail_state.dart';
 import 'package:uod/presentation/components/my_button.dart';
 import 'package:uod/presentation/components/not_connected_view.dart';
-import 'package:uod/presentation/pages/scanner_page.dart';
+import 'package:uod/presentation/pages/detail/event_detail_page.dart';
 
 class EmployeeDetailPage extends StatelessWidget {
   const EmployeeDetailPage({Key? key}) : super(key: key);
@@ -32,6 +34,30 @@ class EmployeeDetailView extends StatefulWidget {
 }
 
 class _EmployeeDetailViewState extends State<EmployeeDetailView> {
+  String _scanBarcode = 'Unknown';
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'Cancel', true, ScanMode.QR);
+      barcodeScanRes = "5436noh3uz";
+      Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetailPage(eventCode: barcodeScanRes)));
+      debugPrint(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
@@ -46,7 +72,7 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
         if (state.status == BlocStatus.loaded) {
           var details = state.details;
           return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(32.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -131,10 +157,11 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: MyButton(
-                      onPressed: () {
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const ScannerPage()));
-                      },
-                      textName: "Scan"),
+                    onPressed: () {
+                      scanQR();
+                    },
+                    textName: "Scan",
+                  ),
                 ),
               ],
             ),
@@ -143,7 +170,7 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
 
         // Error
         if (state.status == BlocStatus.error) {
-          if(state.failure is NotConnectedFailure){
+          if (state.failure is NotConnectedFailure) {
             return const NotConnectedView();
           }
           return const Center(child: Text("Error Occurred"));
