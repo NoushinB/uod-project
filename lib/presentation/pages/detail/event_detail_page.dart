@@ -67,7 +67,7 @@ class _EventDetailViewState extends State<EventDetailView> {
                     bloc: context.read<ConfirmAttendanceBloc>(),
                     listener: (context, ConfirmAttendanceState confirmState) {
                       if (confirmState.status == BlocStatus.loaded) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SuccessfulPage()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SuccessfulPage()));
                       }
                     },
                     child: BlocBuilder(
