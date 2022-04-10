@@ -13,41 +13,48 @@ class SuccessfulPage extends StatefulWidget {
 class _SuccessfulPageState extends State<SuccessfulPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: SvgPicture.asset(
-                      AppAssets.tick,
-                      color: Colors.green,
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 64,),
+                    SizedBox(
+                      height: 150,
+                      width: 150,
+                      child: SvgPicture.asset(
+                        AppAssets.tick,
+                        color: AppColors.primaryColor,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    "Successful",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green, fontSize: 32),
-                  )
-                ],
+                    const SizedBox(height: 24),
+                    const Text(
+                      "Successful",
+                      style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryColor, fontSize: 32),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      "Your attendance approved successfully",
+                      style: TextStyle( color: AppColors.gray, fontSize: 16),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 32, right: 32),
-              child: MyButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                title: "Return To Home",
-              ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: MyButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  title: "Return To Home",
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

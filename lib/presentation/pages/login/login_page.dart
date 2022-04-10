@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uod/core/constants/app_assets.dart';
-import 'package:uod/core/constants/app_colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:uod/core/core.dart';
 import 'package:uod/core/utils/enums/bloc_status.dart';
 import 'package:uod/data/data_sources/local/shared_prefs/local_storage_service.dart';
 import 'package:uod/injections.dart';
@@ -11,7 +11,7 @@ import 'package:uod/presentation/bloc/login/login_state.dart';
 import 'package:uod/presentation/components/my_button.dart';
 import 'package:uod/presentation/components/my_text_field.dart';
 import 'package:uod/presentation/pages/detail/employee_detail_page.dart';
-import 'package:uod/presentation/pages/login/password_recovery.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -56,7 +56,11 @@ class _LoginViewState extends State<LoginView> {
         }
 
         if (state.status == BlocStatus.error) {
-          // TODO: Show error message to user
+          if (state.failure is NotConnectedFailure) {
+            Fluttertoast.showToast(msg: "You are not connected to internet");
+          } else {
+            Fluttertoast.showToast(msg: "Error Occurred. Check your username/password");
+          }
         }
       },
       child: Padding(
@@ -94,6 +98,7 @@ class _LoginViewState extends State<LoginView> {
                           icon: Icons.lock_outline,
                           hintText: "Input Password",
                           controller: _passwordController,
+                          obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter some text';
@@ -129,7 +134,8 @@ class _LoginViewState extends State<LoginView> {
                         alignment: Alignment.topRight,
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const PasswordRecovery()));
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => const PasswordRecovery()));
+                            _launchURL(NetworkPath.forgotPasswordUrl);
                           },
                           child: const Text("Forgot Password?", style: TextStyle(color: AppColors.errorColor)),
                         ),
@@ -143,5 +149,13 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      Fluttertoast.showToast(msg: "You can't launch this url on your device");
+    }
   }
 }

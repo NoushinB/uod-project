@@ -22,10 +22,12 @@ class EmployeeDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) => getIt<EmployeeDetailBloc>()..add(const FetchEmployeeDetail()),
-        child: const EmployeeDetailView(),
+    return SafeArea(
+      child: Scaffold(
+        body: BlocProvider(
+          create: (context) => getIt<EmployeeDetailBloc>()..add(const FetchEmployeeDetail()),
+          child: const EmployeeDetailView(),
+        ),
       ),
     );
   }
@@ -46,10 +48,10 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'Cancel', true, ScanMode.QR);
-      if(barcodeScanRes != "-1"){
+      if (barcodeScanRes != "-1") {
         barcodeScanRes = "5436noh3uz";
         Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetailPage(eventCode: barcodeScanRes)));
-      }else {
+      } else {
         Fluttertoast.showToast(msg: "QR Code Not Found");
       }
       debugPrint(barcodeScanRes);
@@ -96,7 +98,6 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
                           subtitle: details?.positionTitle,
                           actions: const <Widget>[],
                         ),
-                        const SizedBox(height: 10.0),
                         UserInfo(details: details),
                       ],
                     ),
@@ -119,7 +120,11 @@ class _EmployeeDetailViewState extends State<EmployeeDetailView> {
         // Error
         if (state.status == BlocStatus.error) {
           if (state.failure is NotConnectedFailure) {
-            return const NotConnectedView();
+            return NotConnectedView(
+              tryAgain: () {
+                context.read<EmployeeDetailBloc>().add(const FetchEmployeeDetail());
+              },
+            );
           }
           return const Center(child: Text("Error Occurred"));
         }
@@ -158,7 +163,7 @@ class UserInfo extends StatelessWidget {
                         tiles: [
                           ListTile(
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                            leading: const Icon(Icons.numbers),
+                            leading: const Icon(Icons.info_sharp),
                             title: const Text("Code"),
                             subtitle: Text(details?.employeeCode ?? ""),
                           ),
@@ -176,6 +181,20 @@ class UserInfo extends StatelessWidget {
                             leading: Icon(Icons.person),
                             title: Text("About Me"),
                             subtitle: Text("This is a about me link and you can khow about me in this section."),
+                          ),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.logout,
+                              color: AppColors.errorColor,
+                            ),
+                            title: const Text("Logout"),
+                            subtitle: const Text("You can logout from here."),
+                            onTap: () async {
+                              var _storage = await LocalStorageService.getInstance();
+                              _storage?.token = "";
+                              Navigator.pop(context);
+                              exit(0);
+                            },
                           ),
                         ],
                       ),
@@ -205,14 +224,14 @@ class ProfileHeader extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Ink(
-          height: 100,
+          height: 80,
           decoration: const BoxDecoration(
             color: AppColors.primaryColor,
           ),
         ),
         Container(
           width: double.infinity,
-          margin: const EdgeInsets.only(top: 60),
+          margin: const EdgeInsets.only(top: 40),
           child: Column(
             children: <Widget>[
               Avatar(
@@ -220,35 +239,14 @@ class ProfileHeader extends StatelessWidget {
                 radius: 40,
                 backgroundColor: Colors.white,
                 borderColor: Colors.grey.shade300,
-                borderWidth: 4.0,
+                borderWidth: 0.0,
               ),
               const SizedBox(height: 8),
-              Text(title, style: Theme.of(context).textTheme.titleLarge),
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryColor, fontSize: 24)),
               if (subtitle != null) ...[
                 const SizedBox(height: 5.0),
-                Text(
-                  subtitle!,
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
+                Text(subtitle!, style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.gray, fontSize: 14)),
               ],
-              ElevatedButton(
-                onPressed: () async {
-                  var _storage = await LocalStorageService.getInstance();
-                  _storage?.token = "";
-                  Navigator.pop(context);
-                  exit(0);
-                },
-                child: const Text("Logout", style: TextStyle(color: Colors.red)),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: const BorderSide(color: Colors.red),
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
         )

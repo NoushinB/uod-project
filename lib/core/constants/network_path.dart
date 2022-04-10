@@ -12,6 +12,7 @@ abstract class NetworkPath {
 
   // Identity APIs
   static const String token = "$_identityHost/connect/token";
+  static const String forgotPasswordUrl = "$_identityHost/Account/ForgotPassword";
 
   // Files
   static const String defaultAvatarUrl = "https://i.postimg.cc/ZRs6MP86/7cc7a630624d20f7797cb4c8e93c09c1.png";

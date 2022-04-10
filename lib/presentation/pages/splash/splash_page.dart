@@ -41,7 +41,7 @@ class _SplashPageState extends State<SplashPage> {
                       height: 170,
                     ),
                     const SizedBox(height: 16),
-                    const Text("UOD", style: TextStyle(color: AppColors.black, fontSize: 32, fontWeight: FontWeight.bold)),
+                    const Text("UoD", style: TextStyle(color: AppColors.black, fontSize: 32, fontWeight: FontWeight.bold)),
                     const Text("QA Attendance", style: TextStyle(color: AppColors.black, fontSize: 16, fontWeight: FontWeight.bold)),
                   ],
                 ),
