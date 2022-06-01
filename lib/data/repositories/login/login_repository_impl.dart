@@ -1,6 +1,4 @@
 import 'package:uod/core/core.dart';
-import 'package:uod/core/error/failure.dart';
-import 'package:uod/core/utils/generics/multiple_results.dart';
 import 'package:uod/data/data_sources/remote/login_remote_source.dart';
 import 'package:uod/domain/entities/token.dart';
 import 'package:uod/domain/repositories/login/login_repository.dart';

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uod/data/data.dart';
 import 'package:uod/data/data_sources/remote/event_source.dart';
 import 'package:uod/data/repositories/event/event_detail_repository_impl.dart';
